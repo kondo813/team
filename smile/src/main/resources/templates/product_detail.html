@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Smiley Dog</title>
+<link rel="stylesheet" type="text/css" href="/css/product_detail.css"  th:href="@{/css/product_detail.css}" />
+</head>
+
+<body>
+
+<header>
+	<div th:insert="fragments/page_header::pageHeader"></div>
+</header>
+
+<main>
+	<div class="container">
+		<h2><label th:text="${product.productName}"></label> (<label th:text="${product.productNameKana}"></label>) </h2>
+        
+		<table border="1">
+			<tr>
+				<th width="40%">画像</th><th>価格</th><th>発売元</th><th>発売年月日</th>
+			</tr>
+			<tr height="220px">
+				<td><img th:src="@{{imagePath} (imagePath=${product.imageFullPath}) }"  alt="th:text=${product.productName}"  width="220px"/></td>
+				<td th:text="|${product.price}円|"/>
+				<td th:text="${product.releaseCompany}" />
+				<td th:text="${product.releaseDate}"/>
+			</tr>
+		</table>
+		
+		<div class="productDescription">
+			<label>商品説明</label>
+			<textarea  readonly name="productDescription" rows="5" cols="100" th:text="${product.productDescription}" ></textarea> 
+		</div>
+        
+		<hr/> 
+        
+		<form>
+			<div class="buy">
+				<label>購入個数</label>
+				<input type="number" name="productCount" id="productCount" min="0" max="99"  step="1" value="0" size=15 />
+				<input type="hidden" name="productId" th:value="${product.id}"/>
+				<button type="submit" name="addCartBtn" class="addCartBtn">カートに追加</button>
+			</div>
+		</form>
+	</div>
+</main>
+   
+<script>
+$(() => {
+	$('.addCartBtn').on('click', () => {
+		let productCount = $('#productCount').val();
+		
+		if (productCount == 0) {
+			alert("個数が0です。");
+			return;
+		}
+		
+		$('form').attr('action','/smile/cart/add');
+		$('form').submit();
+	});
+});
+</script>
+
+</body>
+
+</html>

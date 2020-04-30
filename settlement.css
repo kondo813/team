@@ -1,0 +1,143 @@
+header .left {
+    padding: 5px auto;
+    height: 30px;
+    width: 50%;
+    float: left;
+    background-color: red;
+    color: white;
+}
+
+header .right {
+    padding: 5px auto;
+    height: 30px;
+    float: right;
+    width: 50%;
+    background-color: red;
+    color: white;
+}
+
+header .right span {
+    margin-left: 35%;
+}
+
+header .right span a {
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+.tab {
+    float: right;
+    margin: 5px;
+
+}
+
+.submit {
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+}
+
+main {
+    clear: both;
+    background-color: green;
+    height:580px;
+    padding-top: 30px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    font-size: 12px;
+    color: green;
+}
+
+.form {
+    margin: 0 auto;
+    border:lightgray solid 2px;
+    width: 80%;
+    background-color:white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px lightgray;
+}
+
+#cartTable {
+    margin: 0 auto;
+}
+
+#priceTable {
+    margin: 0 auto;
+}
+
+
+table {
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border: 1px solid grey;
+}
+
+#cartTable th {
+    background: grey;
+    color: white;
+}
+
+table#cartTable thead tr th:nth-child(1) {
+    width: 100px;
+}
+
+table#cartTable thead tr th:nth-child(2) {
+    width: 250px;
+}
+
+table#cartTable thead tr th:nth-child(3) {
+    width: 350px;
+}
+
+table#cartTable thead tr th:nth-child(4) {
+    width: 150px;
+}
+
+table#cartTable tbody tr td:nth-child(1) {
+    padding: 5px;
+    text-align: center;
+}
+
+table#cartTable tbody tr td:nth-child(2) {
+    padding: 0 5px;
+    text-align: center;
+}
+
+table#cartTable tbody tr td:nth-child(3) {
+    padding: 0 5px;
+    text-align: center;
+}
+
+table#cartTable tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+.delete {
+    width: 100px;
+    margin-left: 610px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.purchase {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.settlement {
+    width: 100px;
+}
+

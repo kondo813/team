@@ -1,0 +1,1 @@
+package jp.co.internous.smile.model.mapper;

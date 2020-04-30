@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Smiley Dog</title>
+<link rel="stylesheet" type="text/css" href="/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+	<header>
+		<div th:insert="fragments/page_header::pageHeader"></div>
+	</header>
+	<div class="box">
+	
+		<form class="search" action="/smile/searchItem" >
+			<span>カテゴリ
+				<select name="category" id= "category">
+					<option value="0"></option>
+					<option th:each= "category: ${categories}"
+								th:selected= "${selected == category.id}"
+								th:value= "${category.id}"
+								th:text= "${category.categoryName}">
+					</option>
+				</select>
+			</span>
+			<span>商品名（部分一致）
+				<input type="text" name="kensaku" th:value="${kensaku}" maxlength="20"/>
+			</span>
+			<span><input type="submit" value="検索"/></span>
+		</form>
+		
+		<div th:if="${products == null || products.size() == 0}">
+			<p>検索結果はありません。</p>
+		</div>
+		
+		<table th:if="${products != null && products.size() > 0}">
+			<tr class="tr1">
+				<th class="w1">画像</th>
+				<th class="w2">商品名</th>
+				<th class="w3">価格（円）</th>
+				<th class="w4">個数</th>
+				<th class="w5">カート</th>
+			</tr>
+			
+			<tr th:each="product: ${products}">
+				<td><a href="/smile/product/" th:href="@{/smile/product/{id}(id=${product.id})}"><img th:src="${product.imageFullPath}" /></a></td>
+				<td><a href="/smile/product" th:href="@{/smile/product/{id}(id=${product.id})}" th:text= "${product.productName}"></a></td>
+				<td th:text="${product.price}"></td>
+				<td><input type="number"  id="productCount" class="count" min="0" max="99" value="0" size=15/>
+					<input type="hidden" id="productId" name="productId" th:value="${product.id}"/>
+				</td>
+				<td><button class="cartBtn">追加</button></td>
+			</tr>
+		</table>
+	</div>
+	
+	<script>
+		$(() => {
+			$('.cartBtn').on('click', addCart);
+		});
+	
+		let addCart = (event) => {
+			//51line <button>の親の親だから<tr>
+			//43line <tr>からproductIdを取得して、val()でvalue取得
+			let tr = $(event.target).parent().parent();
+			let productId = $(tr).find('#productId').val();
+			let productCount = $(tr).find('#productCount').val();
+		
+			if (productCount == 0) {
+			alert("個数が0です。");
+			
+			return ;	
+		}
+			location.replace(`/smile/cart/add?productId=${productId}&productCount=${productCount}`);
+		}
+	</script>
+</body>
+</html>

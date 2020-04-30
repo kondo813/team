@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Smiley Dog</title>
+<link rel="stylesheet" type="text/css" href="/css/registerUser.css" th:href="@{/css/registerUser.css}">
+<link href="/css/page_header.css" th:href="@{/css/page_header.css}" rel="stylesheet" />
+</head>
+<body>
+<header>
+	<!-- page_header.html -->
+	<div th:insert="fragments/page_header::pageHeader"></div>
+</header>
+<main>
+
+	<div class="box">
+		<h2>新規ユーザー登録</h2>	               
+		<table id="register" class="user">
+			<tr > 
+				<th>氏名</th>
+				<td>
+					<input type="text" name="familyName" placeholder="山田" size=30 maxlength="16"/>
+					<input type="text" name="firstName"  placeholder="太郎" size=30 maxlength="16"/>
+				</td>
+			</tr>
+			<tr>
+				<th>氏名ふりがな</th>
+				<td>
+					<input type="text" name="familyNameKana" placeholder="やまだ" size=30 maxlength="16"/>
+					<input type="text" name="firstNameKana"  placeholder="たろう" size=30 maxlength="16"/>
+				</td>
+			</tr>
+			<tr>
+				<th>性別</th>
+				<td>
+					<label><input type="radio" name="gender" value="男性" checked />男</label>
+					<label><input type="radio" name="gender" value="女性"  />女</label>
+				</td>                        				</tr>
+			<tr>
+				<th>ユーザー名<br><div class="memo">(メールアドレス)</div></th>
+				<td>
+					<input type="email" name="userName" placeholder="yamada@gmail.com" size=60 maxlength="32"/>						<button id="checkUserName">重複確認</button>
+					<span id="checkOK" class="hidden">OK</span>
+				</td>
+			</tr>
+			<tr>
+				<th>パスワード<br><div class="memo">(半角英数字6～16文字)</div></th>
+				<td>
+					<input type="password" name="password" placeholder="パスワード" size=10 maxlength="16">
+				</td>
+			</tr>
+		</table>	
+		<span class="info hidden">登録が完了しました。</span>
+		<div class="buttonArea">
+			<button id="confirm"  disabled>確認</button>
+		</div>
+	</div>
+		
+	<!-- dialog_duplicated_user_name.html(ユーザーネーム重複確認ダイアログ) -->
+  	<div th:insert="fragments/dialog_duplicated_user_name::dialogDuplicatedUserName"></div>
+ 		
+ 	<!-- dialog_input_user_error.html(入力エラー確認ダイアログ) -->
+  	<div th:insert="fragments/dialog_input_user_error::dialogInputUserError"></div>
+  
+  	<!-- dialog_input_user_confirm.html(入力確認ダイアログ) -->
+  	<div th:insert="fragments/dialog_input_user_confirm::dialogInputUserConfirm"></div>
+
+</main>
+
+<script>
+
+	const errorSelector = {
+  		'姓': '.familyNameError',
+  		'名': '.firstNameError',
+  		'姓ふりがな': '.familyNameKanaError',
+  		'名ふりがな': '.firstNameKanaError',
+  		'ユーザー名': '.userNameError',
+ 		'パスワード': '.passwordError',
+	};
+
+	$(() => {
+  
+  		/**
+  		*各モーダルダイアログの設定
+  		*/
+		$('#duplicatedUserName').dialog(dialogConfig.duplicatedUserName);
+  		$('#inputUserError').dialog(dialogConfig.inputUserError);
+  		$('#inputUserConfirm').dialog(dialogConfig.inputUserConfirm);
+  
+  		/**
+  		*重複確認ボタンを押したときの処理
+  		*@return  function checkUserName(userName)
+  		*/
+ 		$('button#checkUserName').on('click', () => {
+  			let userName = $('table#register input[name=userName]');
+  			if (isEmpty($(userName).val())) return;
+  			checkUserName(userName);
+  		});
+  
+  
+  		/**
+ 		 *確認ボタンを押した時の処理
+ 		 *@param errorInfo 入力チェック（validator.js） 
+  		*/
+  		$('button#confirm').on('click', () => {
+	  
+    		let errInfo = validate({
+      		 'familyName': checker.familyName,
+      		 'firstName': checker.firstName,
+      		 'familyNameKana': checker.familyNameKana,
+      		 'firstNameKana': checker.firstNameKana,
+      		 'gender': null,
+     		 'userName': checker.userName,
+     		 'password': checker.password,
+			});
+    
+    		if (errInfo.isError) {
+      			createErrorDialog(errInfo.errMsg);
+      			$("#inputUserError").dialog("open");
+    		} else {
+				createConfirmDialog({
+        		 'familyName': checker.familyName,
+        		 'firstName': checker.firstName,
+        		 'familyNameKana': checker.familyNameKana,
+        		 'firstNameKana': checker.firstNameKana,
+        		 'gender': null,
+        		 'userName': checker.userName,
+       			 'password': checker.password,
+     		 	});
+     	 		$("#inputUserConfirm").dialog("open");
+    			}
+		});
+　　});
+
+
+		/**
+ 		*ajax通信で重複確認をする関数
+ 		*@param errorInfo 入力チェック（validator.js） 
+		*/
+	function checkUserName(userName) {
+		let errInfo = validate({ 'userName': checker.userName });
+		if (errInfo.isError) {
+    		createErrorDialog(errInfo.errMsg);
+    		$("#inputUserError").dialog("open");
+    		return;
+  		}
+	
+		$.ajax({
+   			type: 'POST',
+    		url: '/smile/user/duplicatedUserName',
+    		data: userName,
+    		scriptCharset: 'utf-8'
+  		})
+  		.then((result) => {
+   	 		if (result) {  
+    			$('button#confirm').prop('disabled', true);
+    			$("#duplicatedUserName").dialog("open");
+    	
+    			$('span#checkOK').prop('class', 'hidden');
+    		} else {     
+    			$('button#confirm').prop('disabled', false);
+    	
+    			$('span#checkOK').prop('class', 'info');
+   	 		}
+  		}, () => {
+	  		alert('Error: ajax connection failed.');
+  		});
+	}
+
+</script>
+		
+</body>
+</html>

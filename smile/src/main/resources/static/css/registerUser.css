@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/*body配色*/
+body{
+	background:linear-gradient(to bottom,#b6fbff,#83a4d4) fixed;
+    color: #D2B48C;/*茶色の文字*/  
+}   
+
+/*白いボックス*/
+.box{
+	width: 80%;
+    background-color: white;
+	
+	margin: 0 auto;
+    margin-bottom: 3%;
+    margin-top: 2%;
+    padding: 10px;  
+    border-radius: 20px;
+}
+
+h2{
+	text-align:center;
+}
+/*テーブル内部*/
+table{
+	text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid #D2B48C;
+    border-collapse: collapse;
+}
+th{
+    border:1px solid #D2B48C;
+	background-color: antiquewhite;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%; 
+}
+td{
+    border:1px solid #D2B48C;
+    text-align: left;
+	padding-left: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.memo{
+    font-size: 70%;
+}
+
+#checkUserName{
+   margin-left: 2%;
+}
+#checkOK{
+	margin-left:2%;
+}
+
+/*確認ボタン*/
+.buttonArea{
+	text-align:right;
+}
+
+#confirm{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right:10%;
+    width: 10%; 
+}
+button:disabled{
+	color:#cccccc;
+	
+}
+
+/*初期に表示しないもの*/
+.hidden {
+	display: none;
+}
+
+/*登録完了後メッセージ*/
+.info{
+	margin-left:10%;
+	margin-top:2%;
+}
+
+/*ダイアログ*/
+.errorContent{
+	color:red;
+	font-size:80%;
+}
+.error{
+	margin-bottom:3%;
+}

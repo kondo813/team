@@ -1,0 +1,93 @@
+<!--DBから受け取るデータは、現段階ではむき出しでいい
+     リスト表示分岐はEC13 10p参照-->
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style5.css">
+    </head>
+
+    
+<body>
+    
+<header>
+    
+    <div class="left">
+        <span>Smily Dog</span>
+    </div>
+    
+    <div class="right">
+        <span>ようこそ！ メールアドレスさん <a href="register_user.html">新規ユーザー登録はこちら</a></span>
+    </div>    
+        
+</header>
+    
+
+    
+    <div class="tab">
+        <input type="submit" class="submit" value="カート">
+        <input type="submit" class="submit" value="マイページ">
+        <!--ログアウトボタン横の空欄2つ　POST通信しなくてもいい？-->
+        <input type="text" class="text" size="20" name="username"> 
+        <input type="text" class="text" size="20" name="password">
+    </div> 
+
+    <!--カートリスト DBと通信 13_EC参照-->
+    
+<main>
+        
+    <div class="form">
+            
+        <h2>カート</h2>
+        <table id="cartTable">
+            
+            <thead>
+            <tr>
+                <th>選択</th>
+                <th>画像</th>
+                <th>商品名</th>
+                <th>価格(円)</th>
+                <th>個数</th>
+                <th>小計(円)</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+            <tr th:each="product: ${mst_product}">
+                <td><input type="checkbox" class="checkbox" /></td>
+                <td><img src="image_full_path"></td>
+                <td th:text="${product_name}" />
+                <td th:text="${price}" />
+                <td th:text="${product_count}" />
+                <td th:text="${product_count} * ${price}" />
+            </tr>
+            </tbody>
+            
+        </table>
+        
+        <!--合計欄 DBと通信 tbodyなし-->
+        <table id="priceTable"　>
+            
+            <thead>
+            <tr th:each="total_price: ${tbl_cart}" >
+                <th>合計(円)</th>
+                <th th:text="${product_count}">個数</th>
+                <th th:text="${product_count} * ${price}" />小計(円)
+            </tr>
+            </thead>
+            
+        </table>
+            
+        <input type="button" class="delete" value="削除">
+        <input type="button" class="purchase" value="購入">
+            
+    </div>
+  
+</main>
+    
+</body>
+    
+</html>
+    
+    

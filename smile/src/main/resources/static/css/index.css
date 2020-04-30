@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body{
+	background: linear-gradient(to bottom, #b6fbff, #83a4d4) fixed;/*青色グラデーションの背景*/
+	color: #D2B48C;/*茶色の文字*/
+}
+
+.box{/*白いところ*/
+	margin: 0 auto; 
+	width: 80%;
+	background-color: white;
+	border-radius: 20px;/*白いところの角丸率*/
+	text-align: center;
+	margin-bottom: 3%; 
+	margin-top: 2%;
+	padding: 10px;
+	height: 700px;
+}
+
+span{
+	margin-right: 5%;
+}
+
+table{
+	width: 80%;
+	margin: 0 auto;
+	border: 2px solid #D2B48C;
+	border-collapse: collapse;
+	margin-top: 2%;
+}
+
+td{
+	padding: 10px;
+}
+
+th, td{
+	border: 1px solid #D2B48C;
+}
+
+.tr1{
+	background-color: antiquewhite;/*テーブル一番上のクリーム色*/
+}
+
+img{
+	width: 70px;
+	height: 70px;
+}
+
+.count{
+	width: 40%;
+	text-align: right;
+}
+
+.w1{
+	width: 10%;
+}
+.w2{
+	width: 40%;
+}
+.w3{
+	width: 14%;
+}
+.w4{
+	width: 14%;
+}
+.w5{
+	width: 14%;
+}

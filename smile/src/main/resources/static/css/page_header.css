@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+html, body, header, h1, ul {
+	margin: 0 auto;
+}
+
+header .header_top {
+	display: inline-block;
+	width: 100%;
+	background-color: antiquewhite;
+	padding-bottom: 7px;
+}
+
+header .header_top h1 {
+	font-family: serif;
+	float: left;
+	display: block;
+	padding-top: 0;
+	margin-left: 2%;
+}
+h1 #topLink {
+	text-decoration: none;
+}
+
+header .header_welcome_link {
+	float: right;
+	margin-right: 5%;
+}
+
+header .header_welcome_link span {
+	color: black;
+	display: inline-block;
+	float: left;
+	line-height: 3;
+	margin-right: 0;
+}
+header .header_welcome_link a {
+	font-size: 14px;
+}
+
+header .header_bottom {
+	clear: left;
+	display: inline-block;
+	width: 100%;
+	background-color: white;
+	margin-top: -14px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+header .header_list_login {
+	float: right;
+	margin-right: 5%;
+}
+
+header .header_list_login ul {
+	display: inline-block;
+}
+
+header .header_list_login li {
+	display: inline-block;
+}
+
+#cartBtn, #mypage {
+	text-align: center;
+    border: 1px solid lightgray;
+    background-color: #0080ff;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+    border-bottom: solid 2px gray;
+    margin-left: 5px;
+}
+#cartBtn a, #mypage a {
+	display: inline-block;
+	width: 100px;
+	color: white;
+	text-decoration: none;
+}
+
+.header_list_login .hidden {
+	display: none;
+	padding-bottom: 0;
+}
+
+header .header_list_login form {
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+header .header_list_login input[name=userName] {
+	width: 100px;
+}
+
+header .header_list_login input[name=password] {
+	width: 100px;
+}
+
+header .header_list_login form button {
+	width: 6.2em;
+	float: none;
+	-webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+header .header_list_login form .hidden {
+	display: none;;
+}
+
+#dialog_login_error {
+	text-align: center;
+}
+
+#dialog_login_error h2 {
+	font-size: 1.5em;
+	display: inline;
+	color: red;
+}
+
+/* パスワード再設定ダイアログ */
+#dialog_login_error, #resetPassword {
+	display: none;
+}
+
+.confirm {
+    width: 99%;
+    margin: 0 auto;
+    display: inline-block;
+    border: 0px solid #D2B48C;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.confirm th {
+	width: 300px;
+    border:1px solid #D2B48C;
+    background-color: antiquewhite;
+    text-align: center;
+    color: #D2B48C;
+}
+
+.confirm td {
+	width: 450px;
+    border:1px solid #D2B48C;
+    text-align: left;
+}
+
+.confirm span {
+	padding-left: 1px;
+}
+
+.confirm input {
+	width: 97%;
+	margin: 2px;
+}
+
+#resetPassword .note {
+	display: block;
+	color: #D2B48C;
+}
